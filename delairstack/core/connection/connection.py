@@ -16,7 +16,7 @@ LOGGER = logging.getLogger(__name__)
 class Connection(AbstractConnection):
     def __init__(self, *, base_url, disable_ssl_certificate=False,
                  credentials=None, max_retries=10,
-                 access_token=None):
+                 access_token=None, proxy_url=None):
         super().__init__(base_url=base_url,
                          disable_ssl_certificate=disable_ssl_certificate)
 
@@ -25,7 +25,11 @@ class Connection(AbstractConnection):
             cert_reqs = 'CERT_NONE'
             urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-        self._http = urllib3.PoolManager(cert_reqs=cert_reqs)
+        if proxy_url is not None:
+            self._http = urllib3.ProxyManager(proxy_url=proxy_url,
+                                              cert_reqs=cert_reqs)
+        else:
+            self._http = urllib3.PoolManager(cert_reqs=cert_reqs)
 
         self._retries = Retry(total=max_retries, backoff_factor=1,
                               status_forcelist=[409, 413, 429,
@@ -44,7 +48,8 @@ class Connection(AbstractConnection):
                 base_url=base_url,
                 disable_ssl_certificate=disable_ssl_certificate,
                 token_manager=self._token_manager,
-                retries=self._retries)
+                retries=self._retries,
+                proxy_url=proxy_url)
 
     @property
     def asynchronous(self):

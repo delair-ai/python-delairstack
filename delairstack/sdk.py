@@ -1,4 +1,5 @@
 import logging
+import os
 
 from delairstack.apis.client.annotations.annotationsimpl import AnnotationsImpl
 from delairstack.apis.client.comments.commentsimpl import CommentsImpl
@@ -49,6 +50,10 @@ def _create_connection(config: ConnectionConfig,
                  'credentials': credentials,
                  'access_token': access_token}
 
+    if hasattr(config, 'proxy_url'):
+        LOGGER.info('Use proxy {!r}'.format(config.proxy_url))
+        conn_opts.update({'proxy_url': config.proxy_url})
+
     if hasattr(config, 'connection'):
         for key in ('disable_ssl_certificate', 'max_retries'):
             if key in config.connection:
@@ -93,7 +98,8 @@ class DelairStackSDK():
     def __init__(self,  *, config_path: str = None,
                  user: str = None, password: str = None,
                  client_id: str = None, secret: str = None,
-                 url: str = None, domain: str = None, **kwargs):
+                 url: str = None, domain: str = None,
+                 proxy_url: str = None, **kwargs):
         """Initializes Delair.ai Python SDK entry point.
 
         Args:
@@ -112,6 +118,8 @@ class DelairStackSDK():
 
             domain: Optional platform domain.
 
+            proxy_url: Optional proxy URL.
+
             kwargs: Optional keyword arguments to merge with
                            the configuration.
 
@@ -119,14 +127,27 @@ class DelairStackSDK():
         LOGGER.info('Initializing SDK')
 
         connection_params = kwargs
+
         # Only keep defined parameters
         for param_name, value in (('file_path', config_path), ('user', user),
                                   ('password', password),
                                   ('client_id', client_id),
                                   ('secret', secret), ('url', url),
-                                  ('domain', domain)):
+                                  ('domain', domain),
+                                  ('proxy_url', proxy_url)):
             if value is not None:
                 connection_params[param_name] = value
+
+        for env_var in ('https_proxy', 'HTTPS_PROXY',
+                        'http_proxy', 'HTTP_PROXY'):
+            env_var_value = os.environ.get(env_var)
+            if env_var_value is not None:
+                connection_params['proxy_url'] = env_var_value
+                LOGGER.info(
+                    'Found environment variable {!r} with value: {!r}'.format(
+                        env_var, env_var_value)
+                )
+                break
 
         connection_config = ConnectionConfig(**connection_params)
         credentials = _get_credentials(connection_config)

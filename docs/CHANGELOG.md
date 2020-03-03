@@ -5,6 +5,12 @@ Notable changes to Delair-Stack Python SDK are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.5] - 2020-03-03
+
+### Added
+
+- Support the connection through a proxy server (DAI-5047)
+
 ## [1.7.4] - 2020-02-04
 
 ### Changed

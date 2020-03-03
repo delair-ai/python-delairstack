@@ -51,7 +51,8 @@ class ConnectionConfig(Config):
     def __init__(self, file_path: str = None, *,
                  user: str = None, password: str = None,
                  client_id: str = None, secret: str = None,
-                 url: str = None, domain: str = None, **kwargs):
+                 url: str = None, domain: str = None, proxy_url: str = None,
+                 **kwargs):
         """Initializes a connection configuration.
 
         Args:
@@ -69,6 +70,8 @@ class ConnectionConfig(Config):
             url: Optional platform URL (default ``https://www.delair.ai``).
 
             domain: Optional domain.
+
+            proxy_url: Optional proxy URL.
 
             kwargs: Optional keyword arguments to merge with
                             the configuration.
@@ -108,7 +111,8 @@ class ConnectionConfig(Config):
                                   ('client_id', client_id),
                                   ('secret', secret),
                                   ('url', url),
-                                  ('domain', domain)):
+                                  ('domain', domain),
+                                  ('proxy_url', proxy_url)):
             if value is not None:
                 connection_params[param_name] = value
 

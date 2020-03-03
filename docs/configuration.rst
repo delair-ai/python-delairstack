@@ -42,6 +42,10 @@ Here are the configurable properties:
 - ``connection`` - A dictionnary providing the connection
   configuration. 
 
+- ``proxy_url`` - An optional proxy URL (⚠️ will be overrided by the value of
+  ``https_proxy`` or ``http_proxy`` environment variable if set).
+
+
 The connection configuration can specify the default number of retries
 through the key ``max_retries`` (the default is to retry each request
 10 times with a backoff factor) and whether to disable check of SSL
@@ -80,7 +84,8 @@ configurations::
       "connection": {
         "max_retries": 3,
         "disable_ssl_certificate": true
-      }
+      },
+      "proxy_url": "https://my-proxy.com:8888"
     }
     
 Custom Configuration File

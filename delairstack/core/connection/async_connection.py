@@ -13,7 +13,8 @@ LOGGER = logging.getLogger(__name__)
 
 class AsyncConnection(AbstractConnection):
     def __init__(self, *, base_url, disable_ssl_certificate,
-                 token_manager, retries, max_requests_workers=6):
+                 token_manager, retries, max_requests_workers=6,
+                 proxy_url=None):
         super().__init__(base_url=base_url,
                          disable_ssl_certificate=disable_ssl_certificate,
                          token_manager=token_manager, retries=retries)
@@ -26,6 +27,11 @@ class AsyncConnection(AbstractConnection):
         self._asession = FuturesSession(executor=executor)
         self._asession.mount('https://', HTTPAdapter(**adapter_kwargs))
         self._asession.mount('http://', HTTPAdapter(**adapter_kwargs))
+        if proxy_url is not None:
+            self._asession.proxies = {
+                'http': proxy_url,
+                'https': proxy_url,
+            }
         self._access_token_lock = Lock()
         self._max_requests_workers = max_requests_workers
 
