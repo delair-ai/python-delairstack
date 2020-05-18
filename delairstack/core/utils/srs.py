@@ -19,7 +19,7 @@ def __name2wkt(name: AnyStr, *, wkts_path: AnyStr) -> AnyStr:
     res_name = '{}/{}.wkt'.format(wkts_path, name)
     try:
         wkt = resource_string(__name__, res_name).decode('utf-8')
-        flatten_wkt = ''.join([l.strip() for l in wkt.splitlines()])
+        flatten_wkt = ''.join([line.strip() for line in wkt.splitlines()])
         return flatten_wkt
     except FileNotFoundError:
         raise ValueError('Unknown SRS name: {}'.format(name))

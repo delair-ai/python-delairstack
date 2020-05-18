@@ -5,6 +5,16 @@ Notable changes to Delair-Stack Python SDK are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.7] - 2020-05-14
+
+### Changed
+
+- Always delete analytics permanently in `sdk.analytics.delete`, `permanent` parameter is now removed (DAI-5752)
+
+### Added
+
+- Add `sdk.products.cancel` to cancel a running analytic product (DAI-5411)
+
 ## [1.7.6] - 2020-04-24
 
 ### Changed

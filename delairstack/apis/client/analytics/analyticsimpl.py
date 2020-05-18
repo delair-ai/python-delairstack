@@ -219,30 +219,30 @@ class AnalyticsImpl(Analytics):
 
         return Resource(id=desc['_id'], desc=desc, manager=self)
 
-    def delete(self, analytic: Union[ResourceId, List[ResourceId]], *,
-               permanent: bool = False, **kwargs) -> None:
-        """Delete an analytic or a list of analytics.
+    def delete(self, analytic: Union[ResourceId, List[ResourceId]], **kwargs) -> None:
+        """Delete an analytic or a list of analytics permanently.
 
         Args:
             analytic: Analytic identifier (or list of identifiers) to delete.
-
-            permanent: Whether to delete analytics permanently or not.
-                Default to False.
 
             **kwargs: Optional keyword arguments. Those arguments are
                 passed as is to the API provider.
 
         """
         if not isinstance(analytic, list):
-            analytic = [analytic]
+            analytic_list = [analytic]
+        else:
+            analytic_list = analytic
 
-        data = {'analytics':  analytic}
-        data.update(kwargs)
+        for analytic in analytic_list:
+            data = {'analytic':  analytic}
+            data.update(kwargs)
 
-        path = 'delete-analytics' if not permanent \
-            else 'delete-analytics-permanently'
-
-        self._provider.post(path=path, data=data, as_json=False)
+            self._provider.post(
+                path='delete-analytic-permanently',
+                data=data,
+                as_json=False
+            )
 
     def order(self, analytic: ResourceId, *, inputs: dict = None,
               parameters: dict = None, deliverables: List[str] = None,

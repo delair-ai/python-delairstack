@@ -98,6 +98,24 @@ class ProductsImpl(Products):
         desc = self._provider.post('describe-product', data=data)
         return Resource(id=desc['_id'], desc=desc, manager=self)
 
+    def cancel(self, product: ResourceId) -> Resource:
+        """Cancel a running Analytics product.
+
+        Args:
+            product: Identifier of the product to cancel.
+
+        Returns:
+            The product description.
+
+        Raises:
+            ResponseError: When the ``product`` identifier is incorrect or has
+                not been found.
+
+        """
+        data = {'product': product}
+        desc = self._provider.post('cancel-product', data=data)
+        return Resource(id=desc['_id'], desc=desc, manager=self)
+
     def retrieve_logs(self, product: ResourceId,
                       **kwargs) -> ProductLogsWithTotal:
         """Retrieve logs for a product.
