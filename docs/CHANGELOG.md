@@ -5,6 +5,18 @@ Notable changes to Delair-Stack Python SDK are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.6] - 2020-04-24
+
+### Changed
+
+- Use tox to execute unit tests against several Python versions (3.4 to 3.8) (DAI-5488)
+
+### Added
+
+- Add functions to retrieve the logs of your custom analytic executions `sdk.products.retrieve_logs` and `sdk.products.follow_logs` (DAI-5403)
+- Add functions to interact with Analytics and Products: `sdk.analytics` and `sdk.products` (DAI-5460)
+- Add `has_headerfile` parameter in `sdk.datasets.create_raster_dataset` to support ENVI header file (DAI-5282)
+   
 ## [1.7.5] - 2020-03-03
 
 ### Added

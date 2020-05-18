@@ -39,3 +39,6 @@
 /development-conf.json
 /staging-conf.json
 /production-conf.json
+
+# Test
+.tox/

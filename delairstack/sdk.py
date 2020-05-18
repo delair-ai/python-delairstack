@@ -1,6 +1,8 @@
 import logging
 import os
 
+from delairstack.apis.client.analytics.analyticsimpl import AnalyticsImpl
+from delairstack.apis.client.analytics.productsimpl import ProductsImpl
 from delairstack.apis.client.annotations.annotationsimpl import AnnotationsImpl
 from delairstack.apis.client.comments.commentsimpl import CommentsImpl
 from delairstack.apis.client.datamngt.datasetsimpl import DatasetsImpl
@@ -9,8 +11,11 @@ from delairstack.apis.client.projectmngt.missionsimpl import MissionsImpl
 from delairstack.apis.client.projectmngt.projectsimpl import ProjectsImpl
 from delairstack.apis.client.auth.sharetokensimpl import ShareTokensImpl
 from delairstack.apis.client.tags.tagsimpl import TagsImpl
-from delairstack.apis.provider import (AnnotationsAPI, AuthAPI,
-                                       DataManagementAPI, ProjectManagerAPI,
+from delairstack.apis.provider import (AnalyticsServiceAPI,
+                                       AnnotationsAPI,
+                                       AuthAPI,
+                                       DataManagementAPI,
+                                       ProjectManagerAPI,
                                        UIServicesAPI)
 from delairstack.core.config import ConnectionConfig
 from delairstack.core.connection.connection import Connection
@@ -163,6 +168,7 @@ class DelairStackSDK():
     def __set_providers(self):
         provider_args = {'connection': self._connection}
         self._providers = {
+            'analytics_service_api': AnalyticsServiceAPI(**provider_args),
             'annotations_api': AnnotationsAPI(**provider_args),
             'auth_api': AuthAPI(**provider_args),
             'data_management_api': DataManagementAPI(**provider_args),
@@ -174,11 +180,13 @@ class DelairStackSDK():
         kwargs = {'sdk': self}
         kwargs.update(self._providers)
 
+        self.analytics = AnalyticsImpl(**kwargs)
         self.annotations = AnnotationsImpl(**kwargs)
         self.comments = CommentsImpl(**kwargs)
         self.datasets = DatasetsImpl(**kwargs)
         self.flights = FlightsImpl(**kwargs)
         self.missions = MissionsImpl(**kwargs)
+        self.products = ProductsImpl(**kwargs)
         self.projects = ProjectsImpl(**kwargs)
         self.share_tokens = ShareTokensImpl(**kwargs)
         self.tags = TagsImpl(**kwargs)

@@ -18,6 +18,11 @@ with open('delairstack/__init__.py') as fh:
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+test_deps = [
+    'pytest',
+    'urllib3-mock>=0.3.3'
+]
+
 setup(name='python-delairstack',
       version=VERSION,
       license='MIT',
@@ -27,7 +32,7 @@ setup(name='python-delairstack',
       author='Delair.ai Backend Team',
       author_email='backend-team@delair.aero',
       url='https://github.com/delair-ai/python-delairstack',
-      install_requires=['urllib3>=1.23', 'requests-futures>=0.9.7', 'appdirs>=1.4.3', 'pathvalidate==0.29.1'],
+      install_requires=['urllib3>=1.23', 'requests-futures>=0.9.7', 'appdirs>=1.4.3', 'pathvalidate'],
       packages=find_packages(exclude=['docs', 'tests*', 'notebooks']),
       package_dir={'delairstack': 'delairstack'},
       package_data={
@@ -35,7 +40,7 @@ setup(name='python-delairstack',
                           'core/utils/vertcrs/*.wkt']
           },
       test_suite='tests',
-      tests_require=['urllib3-mock>=0.3.3'],
+      tests_require=test_deps,
       classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
@@ -50,9 +55,10 @@ setup(name='python-delairstack',
       keywords='sdk delair delair.ai',
       extras_require={
           'development': ['pycodestyle>=2.4.0'],
-          'coverage': ['coverage>=4.4'],
+          'coverage': ['coverage>=4.4', 'pytest-cov'],
           'documentation': ['sphinx>=1.8.5', 'sphinx_rtd_theme',
                             'sphinx_autodoc_typehints',
-                            'sphinx-autobuild', 'recommonmark']
+                            'sphinx-autobuild', 'recommonmark'],
+          'tests': test_deps
           }
 )

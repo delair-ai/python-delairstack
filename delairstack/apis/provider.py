@@ -162,3 +162,7 @@ class DataManagementAPI(Provider):
 
 class UIServicesAPI(Provider):
     _root_path = 'uisrv'
+
+
+class AnalyticsServiceAPI(Provider):
+    _root_path = 'analytics-service'

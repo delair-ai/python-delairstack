@@ -4,6 +4,7 @@
 import pathlib
 import sys
 
+from delairstack.core.resources.analytics.products import ProductLog
 from delairstack.core.resources.resource import Resource
 
 if sys.version_info.minor < 5:
@@ -45,3 +46,7 @@ SomeResourceIds = NewType('SomeResourceIds',
 
 SomeResources = NewType('SomeResources',
                         Union[Resource, List[Resource]])
+
+ProductLogsWithTotal = NamedTuple(
+    'ProductLogsWithTotal',
+    [('total', int), ('logs', List[ProductLog])])

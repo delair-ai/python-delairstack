@@ -2,11 +2,12 @@
 
 ## Running unit tests
 
-Unit tests are written with the `unittest` module:
+Unit tests are written with the `unittest` module (compatible with `pytest`):
 
 ```shell
+$ python3 -m pip install -e .[tests]
 $ python3 -m pip install -e .[coverage]
-$ python3 -m coverage run setup.py test
+$ pytest --cov delairstack --cov-report term --cov-report html
 ```
 
 ## Documentation

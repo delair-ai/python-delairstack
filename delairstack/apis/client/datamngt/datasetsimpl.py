@@ -398,6 +398,7 @@ class DatasetsImpl(Datasets):
                               bands: List[dict] = None,
                               has_projection_file: bool = False,
                               has_worldfile: bool = False,
+                              has_headerfile: bool = False,
                               **kwargs) -> Resource:
         """Create a dataset of type ``raster``.
 
@@ -437,6 +438,9 @@ class DatasetsImpl(Datasets):
             has_worldfile: Whether there is a sidecar file to
                 georeference the raster.
 
+            has_headerfile: Whether there is a sidecar file for
+                envi format raster.
+
             **kwargs: Optional keyword arguments. Those arguments are
                 passed as is to the API provider.
 
@@ -452,6 +456,9 @@ class DatasetsImpl(Datasets):
 
         if has_worldfile:
             components.append('worldfile')
+
+        if has_headerfile:
+            components.append('header')
 
         if bands:
             params['bands'] = bands
