@@ -5,6 +5,16 @@ Notable changes to Delair-Stack Python SDK are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.8] - 2020-07-20
+
+### Changed
+
+- Specify `utf-8` encoding when opening `README.md` in the `setup.py` (DAI-6185)
+
+### Added
+
+- Support creation/deletion/search of credentials in `sdk.credentials` (DAI-6300)
+
 ## [1.7.7] - 2020-05-14
 
 ### Changed

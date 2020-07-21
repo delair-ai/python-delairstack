@@ -166,3 +166,7 @@ class UIServicesAPI(Provider):
 
 class AnalyticsServiceAPI(Provider):
     _root_path = 'analytics-service'
+
+
+class ExternalProviderServiceAPI(Provider):
+    _root_path = 'external-providers-service'

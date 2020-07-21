@@ -5,6 +5,7 @@ from delairstack.apis.client.analytics.analyticsimpl import AnalyticsImpl
 from delairstack.apis.client.analytics.productsimpl import ProductsImpl
 from delairstack.apis.client.annotations.annotationsimpl import AnnotationsImpl
 from delairstack.apis.client.comments.commentsimpl import CommentsImpl
+from delairstack.apis.client.externalproviders.credentialsimpl import CredentialsImpl
 from delairstack.apis.client.datamngt.datasetsimpl import DatasetsImpl
 from delairstack.apis.client.projectmngt.flightsimpl import FlightsImpl
 from delairstack.apis.client.projectmngt.missionsimpl import MissionsImpl
@@ -15,6 +16,7 @@ from delairstack.apis.provider import (AnalyticsServiceAPI,
                                        AnnotationsAPI,
                                        AuthAPI,
                                        DataManagementAPI,
+                                       ExternalProviderServiceAPI,
                                        ProjectManagerAPI,
                                        UIServicesAPI)
 from delairstack.core.config import ConnectionConfig
@@ -172,6 +174,7 @@ class DelairStackSDK():
             'annotations_api': AnnotationsAPI(**provider_args),
             'auth_api': AuthAPI(**provider_args),
             'data_management_api': DataManagementAPI(**provider_args),
+            'external_provider_service_api': ExternalProviderServiceAPI(**provider_args),
             'project_manager_api': ProjectManagerAPI(**provider_args),
             'ui_services_api': UIServicesAPI(**provider_args)
         }
@@ -183,6 +186,7 @@ class DelairStackSDK():
         self.analytics = AnalyticsImpl(**kwargs)
         self.annotations = AnnotationsImpl(**kwargs)
         self.comments = CommentsImpl(**kwargs)
+        self.credentials = CredentialsImpl(**kwargs)
         self.datasets = DatasetsImpl(**kwargs)
         self.flights = FlightsImpl(**kwargs)
         self.missions = MissionsImpl(**kwargs)

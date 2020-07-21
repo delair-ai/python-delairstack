@@ -15,7 +15,7 @@ with open('delairstack/__init__.py') as fh:
     else:
         raise RuntimeError('The __init__.py module must provide a version')
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 test_deps = [
