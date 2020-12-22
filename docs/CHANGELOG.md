@@ -5,6 +5,13 @@ Notable changes to Delair-Stack Python SDK are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [1.7.9] - 2020-12-22
+
+### Changed
+
+- Deprecate this package in favor of `alteia` Python package (DAI-8201)
+
 ## [1.7.8] - 2020-07-20
 
 ### Changed

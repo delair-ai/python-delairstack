@@ -8,6 +8,15 @@
 
 > This SDK offers a high-level Python interface to [Delair.ai APIs](https://www.delair.ai).
 
+## ⚠️ Deprecation
+
+This repo is replaced by [alteia-python-sdk](https://github.com/alteia-ai/alteia-python-sdk).
+
+**`python-delairstack` is now deprecated, and you should consinder to upgrade to the `alteia` package.**
+
+Refer to the [documentation](https://alteia.readthedocs.io/en/latest/index.html) for installation and usage instructions.
+
+
 ## Installation
 
 ```python

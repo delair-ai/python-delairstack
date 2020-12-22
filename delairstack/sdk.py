@@ -1,5 +1,6 @@
 import logging
 import os
+import warnings
 
 from delairstack.apis.client.analytics.analyticsimpl import AnalyticsImpl
 from delairstack.apis.client.analytics.productsimpl import ProductsImpl
@@ -131,6 +132,11 @@ class DelairStackSDK():
                            the configuration.
 
         """
+        warnings.warn(
+            '"python-delairstack" package has been renamed "alteia". '
+            'Refer to https://github.com/alteia-ai/alteia-python-sdk to upgrade.',
+            DeprecationWarning
+        )
         LOGGER.info('Initializing SDK')
 
         connection_params = kwargs
